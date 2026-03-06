@@ -1,0 +1,44 @@
+/* Basic reset to remove default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation Bar Styling */
+nav {
+    background-color: #333; /* Dark background */
+}
+
+.nav-menu {
+    list-style: none; /* Removes the bullet points */
+    display: flex; /* Aligns items horizontally */
+    justify-content: center; /* Centers the menu items */
+    padding: 15px 0;
+}
+
+.nav-menu li {
+    margin: 0 20px; /* Adds space between the links */
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none; /* Removes underlines from links */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-menu a:hover {
+    color: #4CAF50; /* Changes color when you hover over the link */
+}
+
+/* Basic styling for the main content area */
+main {
+    padding: 40px;
+    text-align: center;
+}
