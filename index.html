@@ -3,21 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Baker - Portfolio</title>
+    <title>Dylan Baker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="portfolio.html">PORTFOLIO</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </nav>
 
     <main>
-        <h1>Dylan Baker</h1>
-        <p>Welcome to my portfolio!</p>
+        <header class="hero">
+            <img src="/images/dylanheadshot.png" alt="Dylan Baker" class="hero-image">
+            
+            <h1>Dylan Baker</h1>
+            <p>Computer Engineering Student | Software Developer | Hardware Maker</p>
+        </header>
+
+<section class="projects-section">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+
+                <a href="portfolio.html" class="project-card">
+                    <h3>Curve Plotter</h3>
+                    <p>Designed and programmed a C++ application using SDL3 which plots a curve given a function of x and y,
+                    and renders the tangent line of the curve corresponding to the x position of the curve nearest the cursor position.</p>
+                </a>
+
+                <a href="portfolio.html" class="project-card">
+                    <h3>2D Pixel-Art Platformer</h3>
+                    <p>A Dark Souls-inspired action platformer developed in Godot 4.5, featuring complex boss mechanics themed around the seven deadly sins.</p>
+                </a>
+
+                <a href="portfolio.html" class="project-card">
+                    <h3>Custom RC Car (In Progress)</h3>
+                    <p>An ongoing engineering and programming project to design and build a custom RC car from scratch.</p>
+                </a>
+
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h2>Technical Skills</h2>
+            <div class="skills-list">
+                <span>C / C++</span>
+                <span>Linux Environment</span>
+                <span>Godot 4.5</span>
+                <span>SOLIDWORKS</span>
+                <span>Arduino & Microcontrollers</span>
+                <span>3D Printing</span>
+            </div>
+        </section>
     </main>
 </body>
 </html>

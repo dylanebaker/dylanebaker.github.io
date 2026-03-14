@@ -4,20 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Baker - Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="portfolio.html">PORTFOLIO</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </nav>
 
-    <main>
-        <h1>Contact</h1>
-        <p>Feel free to reach out to me here.</p>
+<main class="page-wrapper">
+        <h1>Get In Touch</h1>
+        <p>Feel free to reach out to discuss projects, opportunities, or collaborations.</p>
+
+        <div class="contact-container">
+            <form class="contact-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="How can I help you?" required></textarea>
+                </div>
+
+                <label type="submit" class="submit-btn">Send Message</label>
+            </form>
+
+            <div class="contact-info">
+                <h3>Other ways to connect:</h3>
+                <div class="social-links">
+                    <a href="mailto:dylanebaker@gmail.com" class="social-btn">Email Me</a>
+                    
+                    <a href="https://github.com/dylanebaker" target="_blank" class="social-btn">GitHub</a>
+                    
+                    <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" class="social-btn">LinkedIn</a>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 </html>
