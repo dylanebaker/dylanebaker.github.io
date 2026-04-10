@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Baker - Memory Tester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="../portfolio.html">PORTFOLIO</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+            <li><a href="../contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-wrapper project-page-wrapper">
+        <a href="../portfolio.html" class="breadcrumb-link">Back to portfolio</a>
+
+        <section class="project-hero-card">
+            <p class="eyebrow">Game Development</p>
+            <h1>Memory Testing Game</h1>
+            <p class="project-lead">A Python game designed to play increasing sequences of color flashes which must be repeated back.</p>
+
+            <div class="project-meta-row">
+                <span>Python 3.10</span>
+                <span>State Machine</span>
+                <span>UI Design</span>
+            </div>
+        </section>
+
+        <section class="project-detail-grid">
+            <article class="detail-card">
+                <h2>Overview</h2>
+                <p>This project is a browser-playable memory challenge built in Python. The game presents a growing sequence of color flashes and asks the player to repeat the pattern correctly for as long as possible.</p>
+                <p>It focuses on clear visual feedback, escalating difficulty, and simple rules that make it easy to pick up while still becoming demanding over longer runs.</p>
+            </article>
+
+            <article class="detail-card">
+                <h2>Highlights</h2>
+                <ul class="detail-list">
+                    <li>Built in Python and exported for web play.</li>
+                    <li>Increasing sequence length raises difficulty over time.</li>
+                    <li>Fast visual feedback keeps each round readable.</li>
+                    <li>Playable directly inside the portfolio page.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="detail-card media-card">
+            <div class="media-card-header">
+                <h2>Play The Game</h2>
+            </div>
+            <div class="demo-frame-shell" style="max-width: 600px; margin: 0 auto;">
+                <iframe src="../MemoryGame/build/web/index.html" title="Memory Testing Game" class="demo-frame" style="width: 600px; height: 400px;" scrolling="no" allow="autoplay"></iframe>
+            </div>
+            <div class="project-action-row">
+                <a href="../MemoryGame/build/web/index.html" class="primary-link" target="_blank" rel="noreferrer">Open standalone build</a>
+            </div>
+        </section>
+
+    </main>
+
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curve Plotter Embed</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: #eef4e3;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .embed-shell {
+            width: 100%;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .canvas-stage {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 420px;
+            background: #f8fbf1;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        canvas.emscripten {
+            display: block;
+            border: 0;
+            background-color: #000;
+            max-width: 100%;
+            height: auto;
+        }
+
+        #status {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #4a5b41;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        #status:empty,
+        #progress,
+        #spinner,
+        #output {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="status">Loading Curve Plotter...</div>
+    <progress id="progress" max="100" value="0" hidden></progress>
+    <div id="spinner" hidden></div>
+    <textarea id="output" rows="8" hidden></textarea>
+
+    <main class="embed-shell">
+        <div class="canvas-stage" id="canvas-stage">
+            <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+        </div>
+    </main>
+
+    <script>
+        const statusElement = document.getElementById('status');
+        const progressElement = document.getElementById('progress');
+        const spinnerElement = document.getElementById('spinner');
+        const canvasElement = document.getElementById('canvas');
+        const outputElement = document.getElementById('output');
+        const canvasStage = document.getElementById('canvas-stage');
+
+        function fitCanvasToStage() {
+            if (!canvasElement || !canvasStage) {
+                return;
+            }
+
+            const nativeWidth = canvasElement.width || 0;
+            const nativeHeight = canvasElement.height || 0;
+
+            if (!nativeWidth || !nativeHeight) {
+                return;
+            }
+
+            const availableWidth = Math.max(320, canvasStage.clientWidth);
+            const scale = Math.min(1, availableWidth / nativeWidth);
+
+            canvasElement.style.width = Math.round(nativeWidth * scale) + 'px';
+            canvasElement.style.height = Math.round(nativeHeight * scale) + 'px';
+            canvasStage.style.minHeight = Math.round(nativeHeight * scale) + 'px';
+        }
+
+        outputElement.value = '';
+
+        canvasElement.addEventListener('webglcontextlost', function (event) {
+            alert('WebGL context lost. You will need to reload the page.');
+            event.preventDefault();
+        }, false);
+
+        var setStatus = function (text) {
+            if (!setStatus.last) {
+                setStatus.last = { time: Date.now(), text: '' };
+            }
+
+            if (text === setStatus.last.text) {
+                return;
+            }
+
+            var match = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+            var now = Date.now();
+
+            if (match && now - setStatus.last.time < 30) {
+                return;
+            }
+
+            setStatus.last.time = now;
+            setStatus.last.text = text;
+
+            if (match) {
+                text = match[1];
+                progressElement.value = 100 * parseInt(match[2], 10);
+                progressElement.max = 100 * parseInt(match[4], 10);
+            }
+
+            statusElement.textContent = text || '';
+
+            if (!text) {
+                statusElement.style.display = 'none';
+            } else {
+                statusElement.style.display = 'block';
+            }
+        };
+
+        var Module = {
+            print: function () {
+                console.log.apply(console, arguments);
+            },
+            canvas: canvasElement,
+            setStatus: setStatus,
+            totalDependencies: 0,
+            monitorRunDependencies: function (left) {
+                this.totalDependencies = Math.max(this.totalDependencies, left);
+                setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : '');
+            },
+            onRuntimeInitialized: function () {
+                fitCanvasToStage();
+                window.setTimeout(fitCanvasToStage, 200);
+                window.setTimeout(fitCanvasToStage, 800);
+            }
+        };
+
+        setStatus('Loading Curve Plotter...');
+
+        window.addEventListener('resize', fitCanvasToStage);
+        new ResizeObserver(fitCanvasToStage).observe(canvasStage);
+
+        window.onerror = function () {
+            setStatus('Exception thrown, see JavaScript console');
+        };
+    </script>
+    <script async src="index.js"></script>
+</body>
+</html>

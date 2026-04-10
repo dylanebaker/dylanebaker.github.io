@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Baker - Curve Plotter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="../portfolio.html">PORTFOLIO</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+            <li><a href="../contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-wrapper project-page-wrapper">
+        <a href="../portfolio.html" class="breadcrumb-link">Back to portfolio</a>
+
+        <section class="project-hero-card">
+            <p class="eyebrow">Software Project</p>
+            <h1>Curve Plotter</h1>
+            <p class="project-lead">A C++ application built with SDL3 that plots curves, tracks the nearest point to the cursor, and renders the tangent line in real time.</p>
+
+            <div class="project-meta-row">
+                <span>C++</span>
+                <span>SDL3</span>
+                <span>Interactive Math Visualization</span>
+            </div>
+        </section>
+
+        <section class="project-detail-grid">
+            <article class="detail-card">
+                <h2>Overview</h2>
+                <p>This project focuses on interactive visualization. Given a function of x and y, the application plots the resulting curve and continuously calculates the tangent line nearest the cursor position.</p>
+                <p>The result is a tool that combines graphics programming, math-heavy logic, and responsive input handling in a compact desktop-style application.</p>
+            </article>
+
+            <article class="detail-card">
+                <h2>Highlights</h2>
+                <ul class="detail-list">
+                    <li>Plots a curve from user-defined function input.</li>
+                    <li>Finds the point nearest the cursor in real time.</li>
+                    <li>Draws the tangent line corresponding to the selected point.</li>
+                    <li>Runs directly inside the portfolio page as an embedded interactive demo.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="detail-card media-card">
+            <div class="media-card-header">
+                <h2>Project Visual</h2>
+                <p>Interactive preview embedded from the live build.</p>
+            </div>
+            <div class="demo-frame-shell">
+                <iframe src="../CurvePlotter/embed.html" title="Curve Plotter demo" class="demo-frame" id="curve-plotter-frame" scrolling="no"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const curvePlotterFrame = document.getElementById('curve-plotter-frame');
+
+        function syncCurvePlotterFrameHeight() {
+            if (!curvePlotterFrame || !curvePlotterFrame.contentWindow) {
+                return;
+            }
+
+            const embeddedDocument = curvePlotterFrame.contentWindow.document;
+
+            if (!embeddedDocument || !embeddedDocument.documentElement || !embeddedDocument.body) {
+                return;
+            }
+
+            const embeddedRoot = embeddedDocument.documentElement;
+            const embeddedBody = embeddedDocument.body;
+
+            embeddedRoot.style.overflow = 'hidden';
+            embeddedBody.style.overflow = 'hidden';
+            embeddedBody.style.margin = '0';
+
+            curvePlotterFrame.style.height = Math.ceil(Math.max(
+                embeddedBody.scrollHeight,
+                embeddedRoot.scrollHeight,
+                embeddedBody.offsetHeight,
+                embeddedRoot.offsetHeight,
+                embeddedBody.clientHeight,
+                embeddedRoot.clientHeight
+            )) + 'px';
+        }
+
+        curvePlotterFrame.addEventListener('load', function () {
+            syncCurvePlotterFrameHeight();
+
+            const embeddedWindow = curvePlotterFrame.contentWindow;
+            const embeddedDocument = embeddedWindow ? embeddedWindow.document : null;
+
+            if (embeddedDocument && embeddedDocument.documentElement) {
+                const resizeObserver = new ResizeObserver(syncCurvePlotterFrameHeight);
+                resizeObserver.observe(embeddedDocument.documentElement);
+
+                if (embeddedDocument.body) {
+                    resizeObserver.observe(embeddedDocument.body);
+                }
+            }
+
+            window.setTimeout(syncCurvePlotterFrameHeight, 300);
+            window.setTimeout(syncCurvePlotterFrameHeight, 1000);
+        });
+
+        window.addEventListener('resize', syncCurvePlotterFrameHeight);
+    </script>
+</body>
+</html>
