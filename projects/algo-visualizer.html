@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Baker - Sorting Algorithm Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="../portfolio.html">PORTFOLIO</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+            <li><a href="../contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-wrapper project-page-wrapper">
+        <a href="../portfolio.html" class="breadcrumb-link">Back to portfolio</a>
+
+        <section class="project-hero-card">
+            <p class="eyebrow">Software Project</p>
+            <h1>Sorting Algorithm Visualizer</h1>
+            <p class="project-lead">An interactive Python visualizer that animates six classic sorting algorithms in real time, with color-coded bar highlights and pitch-mapped audio feedback.</p>
+
+            <div class="project-meta-row">
+                <span>Python</span>
+                <span>Pygame</span>
+                <span>Algorithm Design</span>
+                <span>Data Visualization</span>
+            </div>
+        </section>
+
+        <section class="project-detail-grid">
+            <article class="detail-card">
+                <h2>Overview</h2>
+                <p>This project visualizes how six different sorting algorithms process a randomized list of values. Each algorithm is stepped through one comparison at a time, with bars color-coded to show the elements currently being examined or swapped.</p>
+                <p>Audio feedback maps each bar's value to a pitch, so you can hear the sort progress as well as see it. A completion jingle plays when the list is fully sorted.</p>
+            </article>
+
+            <article class="detail-card">
+                <h2>Algorithms</h2>
+                <ul class="detail-list">
+                    <li>Bubble Sort</li>
+                    <li>Insertion Sort</li>
+                    <li>Quick Sort</li>
+                    <li>Merge Sort</li>
+                    <li>Heap Sort</li>
+                </ul>
+            </article>
+
+            <article class="detail-card">
+                <h2>Controls</h2>
+                <ul class="detail-list">
+                    <li><strong>Space</strong> — Start sorting</li>
+                    <li><strong>R</strong> — Reset with a new random list</li>
+                    <li><strong>A / D</strong> — Ascending / Descending order</li>
+                    <li><strong>B</strong> — Bubble Sort</li>
+                    <li><strong>I</strong> — Insertion Sort</li>
+                    <li><strong>Q</strong> — Quick Sort</li>
+                    <li><strong>M</strong> — Merge Sort</li>
+                    <li><strong>H</strong> — Heap Sort</li>
+                </ul>
+            </article>
+
+            <article class="detail-card">
+                <h2>Highlights</h2>
+                <ul class="detail-list">
+                    <li>Real-time step-by-step animation of each algorithm.</li>
+                    <li>Pitch-mapped audio feedback tied to bar values.</li>
+                    <li>Support for ascending and descending sort directions.</li>
+                    <li>Runs directly inside the portfolio page as an embedded interactive demo.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="detail-card media-card">
+            <div class="media-card-header">
+                <h2>Live Demo</h2>
+                <p>Click the canvas to start, then use the listed keyboard controls. Audio requires a click to activate.</p>
+            </div>
+            <div class="demo-frame-shell" style="position:relative; width:100%; padding-bottom:66.67%; height:0; overflow:hidden; border-radius:18px; background:#121212;">
+                <iframe
+                    src="/algo-visualizer/web/"
+                    style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="project-action-row">
+                <a href="../algo-visualizer/web/" class="primary-link" target="_blank" rel="noreferrer">Open standalone build</a>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

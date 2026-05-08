@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sorting Algorithm Visualizer</title>
+  <style>
+    @font-face {
+      font-family: 'QuinqueFive';
+      src: url('QuinqueFiveFont.ttf') format('truetype');
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    canvas { display: block; image-rendering: pixelated; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1200, H = 800;
+    canvas.width = W;
+    canvas.height = H;
+
+    function resize() {
+      const s = Math.min(window.innerWidth / W, window.innerHeight / H);
+      canvas.style.width  = W * s + 'px';
+      canvas.style.height = H * s + 'px';
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Layout — matches pygame version exactly
+    const HOR_PAD = 200, VER_PAD = 200;
+    const N = 50, MIN_V = 0, MAX_V = 100;
+    const BAR_W   = Math.round((W - HOR_PAD) / N);           // 20
+    const BAR_H   = Math.floor((H - VER_PAD) / (MAX_V - MIN_V)); // 6
+    const START_X = HOR_PAD >> 1;                             // 100
+
+    // Colors
+    const BG     = '#121212';
+    const WHITE  = '#ffffff';
+    const GREEN  = 'rgb(100,220,100)';
+    const RED    = 'rgb(220,80,80)';
+    const GRAY_C = 'rgb(128,128,128)';
+    const MUTED  = 'rgb(160,160,160)';
+    const GRADS  = ['rgb(74,117,176)', 'rgb(99,155,215)', 'rgb(124,179,234)'];
+
+    // State
+    let list = genList();
+    let sorting = false, ascending = true;
+    let algoName = 'Bubble Sort', algoFn = bubbleSort;
+    let sortGen = null, colorPos = {};
+
+    // ── Audio ────────────────────────────────────────────────────────────────
+    let audioCtx = null, lastToneTime = 0;
+
+    function getAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playTone(value) {
+      const now = performance.now();
+      if (now - lastToneTime < 40) return;
+      lastToneTime = now;
+      try {
+        const ac = getAudio();
+        const freq = 200 + (value - MIN_V) / (MAX_V - MIN_V) * 600;
+        const osc = ac.createOscillator(), gain = ac.createGain();
+        osc.connect(gain); gain.connect(ac.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.08, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.04);
+        osc.start(); osc.stop(ac.currentTime + 0.04);
+      } catch(e) {}
+    }
+
+    function playComplete() {
+      try {
+        const ac = getAudio();
+        [523, 659, 784, 1047].forEach((freq, i) => {
+          const t = ac.currentTime + i * 0.09;
+          const osc = ac.createOscillator(), gain = ac.createGain();
+          osc.connect(gain); gain.connect(ac.destination);
+          osc.frequency.value = freq;
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0.1, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+          osc.start(t); osc.stop(t + 0.1);
+        });
+      } catch(e) {}
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    function genList() {
+      return Array.from({length: N}, () =>
+        Math.floor(Math.random() * (MAX_V - MIN_V + 1)) + MIN_V);
+    }
+
+    // ── Drawing ──────────────────────────────────────────────────────────────
+    function draw() {
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      ctx.fillStyle = WHITE;
+      ctx.font = '24px QuinqueFive, monospace';
+      ctx.fillText(`${algoName} - ${ascending ? 'Ascending' : 'Descending'}`, W / 2, 10);
+
+      ctx.fillStyle = MUTED;
+      ctx.font = '12px QuinqueFive, monospace';
+      ctx.fillText('R - Reset     SPACE - Sort     A - Ascending     D - Descending', W / 2, 50);
+      ctx.fillText('I - Insertion     B - Bubble     Q - Quick     M - Merge     H - Heap', W / 2, 70);
+
+      for (let i = 0; i < list.length; i++) {
+        const val  = list[i];
+        const barH = (val - MIN_V) * BAR_H;
+        const x    = START_X + i * BAR_W;
+        const y    = H - barH;
+        ctx.fillStyle = (colorPos[i] !== undefined) ? colorPos[i] : GRADS[i % 3];
+        ctx.fillRect(x, y, BAR_W - 1, barH);
+      }
+
+      const keys = Object.keys(colorPos);
+      if (keys.length) playTone(list[+keys[0]]);
+    }
+
+    // ── Sorting algorithms ───────────────────────────────────────────────────
+    function* bubbleSort() {
+      for (let i = 0; i < list.length - 1; i++)
+        for (let j = 0; j < list.length - 1 - i; j++)
+          if ((list[j] > list[j+1] && ascending) || (list[j] < list[j+1] && !ascending)) {
+            [list[j], list[j+1]] = [list[j+1], list[j]];
+            colorPos = {[j]: GREEN, [j+1]: RED};
+            yield;
+          }
+    }
+
+    function* insertionSort() {
+      for (let i = 1; i < list.length; i++) {
+        const cur = list[i]; let j = i - 1;
+        while (j >= 0 && ((list[j] > cur && ascending) || (list[j] < cur && !ascending))) {
+          list[j+1] = list[j]; j--;
+          colorPos = {[j+1]: GREEN, [i]: RED};
+          yield;
+        }
+        list[j+1] = cur;
+        colorPos = {[j+1]: GREEN, [i]: RED};
+        yield;
+      }
+    }
+
+    function* mergeSort() { yield* _mergeSplit(0, list.length - 1); }
+
+    function* _mergeSplit(l, r) {
+      if (l < r) {
+        const m = (l + r) >> 1;
+        yield* _mergeSplit(l, m);
+        yield* _mergeSplit(m + 1, r);
+        yield* _merge(l, m, r);
+      }
+    }
+
+    function* _merge(l, m, r) {
+      const L = list.slice(l, m+1), R = list.slice(m+1, r+1);
+      let i = 0, j = 0, k = l;
+      while (i < L.length && j < R.length) {
+        list[k] = ((L[i] <= R[j] && ascending) || (L[i] >= R[j] && !ascending)) ? L[i++] : R[j++];
+        colorPos = {[k]: GREEN}; yield; k++;
+      }
+      while (i < L.length) { list[k] = L[i++]; colorPos = {[k]: GREEN}; yield; k++; }
+      while (j < R.length) { list[k] = R[j++]; colorPos = {[k]: GREEN}; yield; k++; }
+    }
+
+    function* heapSort() {
+      const n = list.length;
+      for (let i = Math.floor(n/2) - 1; i >= 0; i--) yield* _heapify(n, i);
+      for (let i = n - 1; i > 0; i--) {
+        [list[0], list[i]] = [list[i], list[0]];
+        colorPos = {0: RED, [i]: GREEN}; yield;
+        yield* _heapify(i, 0);
+      }
+    }
+
+    function* _heapify(n, i) {
+      let t = i; const l = 2*i+1, r = 2*i+2;
+      if (l < n && ((list[l] > list[t] && ascending)  || (list[l] < list[t] && !ascending))) t = l;
+      if (r < n && ((list[r] > list[t] && ascending)  || (list[r] < list[t] && !ascending))) t = r;
+      if (t !== i) {
+        [list[i], list[t]] = [list[t], list[i]];
+        colorPos = {[i]: GREEN, [t]: RED}; yield;
+        yield* _heapify(n, t);
+      }
+    }
+
+    function* quickSort() { yield* _qsHelper(0, list.length - 1); }
+
+    function* _qsHelper(lo, hi) {
+      if (lo < hi) {
+        const p = yield* _partition(lo, hi);
+        yield* _qsHelper(lo, p - 1);
+        yield* _qsHelper(p + 1, hi);
+      }
+    }
+
+    function* _partition(lo, hi) {
+      const pivot = list[hi]; let i = lo - 1;
+      for (let j = lo; j < hi; j++) {
+        if ((list[j] <= pivot && ascending) || (list[j] >= pivot && !ascending)) {
+          i++; [list[i], list[j]] = [list[j], list[i]];
+          colorPos = {[i]: GREEN, [j]: RED, [hi]: GRAY_C}; yield;
+        }
+      }
+      [list[i+1], list[hi]] = [list[hi], list[i+1]];
+      colorPos = {[i+1]: GREEN, [hi]: RED}; yield;
+      return i + 1;
+    }
+
+    // ── Main loop ────────────────────────────────────────────────────────────
+    const FRAME_MS = 1000 / 45;
+    let lastFrame = 0;
+
+    function loop(ts) {
+      requestAnimationFrame(loop);
+      if (ts - lastFrame < FRAME_MS) return;
+      lastFrame = ts;
+
+      if (sorting) {
+        const {done} = sortGen.next();
+        if (done) { sorting = false; colorPos = {}; playComplete(); }
+      } else {
+        colorPos = {};
+      }
+      draw();
+    }
+
+    // ── Input ────────────────────────────────────────────────────────────────
+    document.addEventListener('keydown', e => {
+      getAudio(); // unlock audio context on first interaction
+      const k = e.key.toLowerCase();
+      if (k === ' ') {
+        e.preventDefault();
+        if (!sorting) { sorting = true; sortGen = algoFn(); }
+        return;
+      }
+      if (k === 'r') { list = genList(); sorting = false; colorPos = {}; return; }
+      if (sorting) return;
+      if      (k === 'a') ascending = true;
+      else if (k === 'd') ascending = false;
+      else if (k === 'b') { algoFn = bubbleSort;    algoName = 'Bubble Sort'; }
+      else if (k === 'i') { algoFn = insertionSort; algoName = 'Insertion Sort'; }
+      else if (k === 'q') { algoFn = quickSort;     algoName = 'Quick Sort'; }
+      else if (k === 'm') { algoFn = mergeSort;     algoName = 'Merge Sort'; }
+      else if (k === 'h') { algoFn = heapSort;      algoName = 'Heap Sort'; }
+    });
+
+    // ── Start ────────────────────────────────────────────────────────────────
+    document.fonts.ready.then(() => requestAnimationFrame(loop));
+  </script>
+</body>
+</html>
