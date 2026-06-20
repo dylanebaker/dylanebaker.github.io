@@ -220,7 +220,7 @@ ul  { list-style: none; }
   height: clamp(160px, 18vw, 240px);
   border-radius: 50%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 35%;
   border: 3px solid var(--border);
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
