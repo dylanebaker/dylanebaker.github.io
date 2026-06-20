@@ -3,68 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DYLAN BAKER</title>
+    <title>Dylan Baker, Computer Engineering Student</title>
+    <meta name="description" content="Dylan Baker, Computer Engineering student at the University of Victoria. Building at the intersection of software and hardware.">
     <link rel="icon" type="image/png" href="/images/faviconTB.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="portfolio.html">PORTFOLIO</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-        </ul>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Dylan Baker</a>
+        <div class="nav-links">
+            <a href="portfolio.html">Projects</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
     </nav>
 
-    <main>
-        <header class="hero">
-            <img src="/images/dylanheadshot.png" alt="Dylan Baker" class="hero-image">
-            
-            <h1>Dylan Baker</h1>
-            <p>Computer Engineering Student | Software Developer | Hardware Maker</p>
-        </header>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <p class="hero-eyebrow">Computer Engineering Student</p>
+                    <h1 class="hero-name">Dylan Baker</h1>
+                    <p class="hero-role">University of Victoria &nbsp;&middot;&nbsp; BEng</p>
+                    <p class="hero-tagline">Building at the intersection of software and hardware, from embedded firmware and custom PCBs to interactive web applications.</p>
+                    <div class="hero-actions">
+                        <a href="portfolio.html" class="btn-primary">View My Work</a>
+                        <a href="/Dylan%20Baker%20-%20Resume%2020260620.pdf" class="btn-secondary" target="_blank" rel="noreferrer">Download Resume</a>
+                    </div>
+                </div>
+                <img src="/images/dylanheadshot.png" alt="Dylan Baker" class="hero-photo">
+            </div>
+        </div>
+    </section>
 
-<section class="projects-section">
-            <h2>Featured Projects</h2>
+    <!-- Projects -->
+    <section class="section section--bordered">
+        <div class="container">
+            <span class="section-label">Projects</span>
+            <h2 class="section-title">Things I've built</h2>
+            <p class="section-sub">A mix of software, hardware, and everything in between.</p>
+
             <div class="project-grid">
 
-                <a href="projects/curve-plotter.html" class="project-card">
-                    <h3>Curve Plotter</h3>
-                    <p>Designed and programmed a C++ application using SDL3 which plots a curve given a function of x and y,
-                    and renders the tangent line of the curve corresponding to the x position of the curve nearest the cursor position.</p>
+                <a href="projects/fm-radio-receiver.html" class="project-card">
+                    <div class="project-card-badge">
+                        <span class="badge-dot active"></span>
+                        In Progress
+                    </div>
+                    <h3 class="project-card-title">FM Radio Receiver</h3>
+                    <p class="project-card-desc">Designing a full FM radio receiver circuit for the ECE299 capstone, with a custom PCB layout in KiCAD and embedded firmware for tuner control and UI.</p>
+                    <div class="project-card-tags">
+                        <span class="tag">KiCAD</span>
+                        <span class="tag">C</span>
+                        <span class="tag">Microcontroller</span>
+                        <span class="tag">PCB Design</span>
+                    </div>
+                    <span class="project-card-link">View Project →</span>
                 </a>
 
                 <a href="projects/memory-tester-game.html" class="project-card">
-                    <h3>Python Memory Game</h3>
-                    <p>Turned a physical memory testing project from highschool into a Python game. Increasing sequences of 
-                        color flashes are played, which the user must repeat, increasing by one every round.</p>
+                    <div class="project-card-badge">
+                        <span class="badge-dot"></span>
+                        Game Dev &middot; Hardware
+                    </div>
+                    <h3 class="project-card-title">Pattern Recognition Game</h3>
+                    <p class="project-card-desc">A sequence-based memory game built in two forms: a custom-etched and soldered PCB console, and a playable Python / web application.</p>
+                    <div class="project-card-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyGame</span>
+                        <span class="tag">PCB Etching</span>
+                        <span class="tag">Soldering</span>
+                    </div>
+                    <span class="project-card-link">View Project →</span>
                 </a>
 
                 <a href="projects/algo-visualizer.html" class="project-card">
-                    <h3>Sorting Algorithm Visualizer</h3>
-                    <p>Interactive Python visualizer that animates six sorting algorithms in real time with color-coded bar highlights and pitch-mapped audio feedback.</p>
+                    <div class="project-card-badge">
+                        <span class="badge-dot"></span>
+                        Software
+                    </div>
+                    <h3 class="project-card-title">Sorting Algorithm Visualizer</h3>
+                    <p class="project-card-desc">Visualizes six sorting algorithms in real time using color-coded bars and an audio feedback system that maps array values to pitches.</p>
+                    <div class="project-card-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyGame</span>
+                        <span class="tag">Data Visualization</span>
+                    </div>
+                    <span class="project-card-link">View Project →</span>
+                </a>
+
+                <a href="projects/curve-plotter.html" class="project-card">
+                    <div class="project-card-badge">
+                        <span class="badge-dot"></span>
+                        Software
+                    </div>
+                    <h3 class="project-card-title">Curve Plotter</h3>
+                    <p class="project-card-desc">A C++ application built with SDL3 that plots curves, tracks the nearest point to the cursor, and renders the tangent line in real time. Compiled to WebAssembly.</p>
+                    <div class="project-card-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">SDL3</span>
+                        <span class="tag">WebAssembly</span>
+                    </div>
+                    <span class="project-card-link">View Project →</span>
+                </a>
+
+                <a href="projects/air-compressor-flywheel.html" class="project-card">
+                    <div class="project-card-badge">
+                        <span class="badge-dot"></span>
+                        Hardware
+                    </div>
+                    <h3 class="project-card-title">Air Compressor Flywheel</h3>
+                    <p class="project-card-desc">Designed a pneumatic flywheel engine in SolidWorks and machined all components to tolerance using a lathe, mill, and drill press, achieving the highest RPM in the class at 6,378 RPM.</p>
+                    <div class="project-card-tags">
+                        <span class="tag">SolidWorks</span>
+                        <span class="tag">Metal Lathe</span>
+                        <span class="tag">Mill</span>
+                    </div>
+                    <span class="project-card-link">View Project →</span>
                 </a>
 
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="skills-section">
-            <h2>Technical Skills</h2>
-            <div class="skills-list">
-                <span>C / C++</span>
-                <span>Linux Environment</span>
-                <span>Godot 4.5</span>
-                <span>SOLIDWORKS</span>
-                <span>Arduino & Microcontrollers</span>
-                <span>3D Printing</span>
+    <!-- Skills -->
+    <section class="section section--bordered">
+        <div class="container">
+            <span class="section-label">Skills</span>
+            <h2 class="section-title">Technical toolkit</h2>
+            <div class="skills-grid">
+                <div>
+                    <p class="skill-group-title">Programming</p>
+                    <div class="skill-tags">
+                        <span class="tag">C</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="skill-group-title">Hardware</p>
+                    <div class="skill-tags">
+                        <span class="tag">Arduino</span>
+                        <span class="tag">PCB Etching</span>
+                        <span class="tag">Soldering</span>
+                        <span class="tag">Oscilloscope</span>
+                        <span class="tag">DMM</span>
+                        <span class="tag">Breadboard</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="skill-group-title">Software & Tools</p>
+                    <div class="skill-tags">
+                        <span class="tag">KiCAD</span>
+                        <span class="tag">SolidWorks</span>
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">MS365</span>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- About snippet -->
+    <section class="section section--bordered">
+        <div class="container">
+            <div class="about-snippet">
+                <div>
+                    <span class="section-label">About</span>
+                    <h2 class="section-title">Hi, I'm Dylan</h2>
+                    <p class="about-body">I'm a Computer Engineering student at the University of Victoria, having transferred from Camosun College with an Engineering Transfer certificate. I'm drawn to the full stack of engineering, writing embedded firmware in C, designing custom PCBs in KiCAD, and building interactive software.</p>
+                    <p class="about-body">Outside of coursework, I run GameTime Painting, a residential painting business I've operated since 2022, and enjoy tinkering with 3D printing and competitive gaming.</p>
+                    <div class="section-actions">
+                        <a href="about.html" class="btn-secondary">More About Me →</a>
+                    </div>
+                </div>
+                <div class="education-list">
+                    <div class="education-item">
+                        <p class="education-item-school">University of Victoria</p>
+                        <p class="education-item-degree">Computer Engineering, BEng</p>
+                        <p class="education-item-date">Sept 2025 – Present</p>
+                    </div>
+                    <div class="education-item">
+                        <p class="education-item-school">Camosun College</p>
+                        <p class="education-item-degree">Engineering Transfer, Certificate</p>
+                        <p class="education-item-date">Sept 2024 – June 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section section--bordered">
+        <div class="container">
+            <div class="contact-cta">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Let's connect</h2>
+                <p class="contact-cta-sub">Open to co-op and internship opportunities in Victoria, BC and beyond.</p>
+                <div class="contact-cta-actions">
+                    <a href="contact.html" class="btn-primary">Send a Message</a>
+                    <a href="/Dylan%20Baker%20-%20Resume%2020260620.pdf" class="btn-secondary" target="_blank" rel="noreferrer">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-copy">&copy; 2026 Dylan Baker</span>
+            <div class="footer-links">
+                <a href="mailto:dylanebaker@gmail.com">Email</a>
+                <a href="https://github.com/dylanebaker" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

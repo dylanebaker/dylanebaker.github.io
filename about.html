@@ -3,45 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Baker - About</title>
+    <title>About, Dylan Baker</title>
+    <link rel="icon" type="image/png" href="/images/faviconTB.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="portfolio.html">PORTFOLIO</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-        </ul>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Dylan Baker</a>
+        <div class="nav-links">
+            <a href="portfolio.html">Projects</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
     </nav>
 
-    <main class="page-wrapper">
-        <div class="about-container">
-            <section class="about-header">
-                <h1>About Me</h1>
-                <p class="about-subtitle">Hi, I'm Dylan. I'm a Computer Engineering student with a passion for building software, designing games, and tinkering with hardware.</p>
-            </section>
-
-            <section class="about-content">
-                <div class="about-card">
-                    <h3>My Background</h3>
-                    <p>I am currently studying at the University of Victoria. 
-                        I enjoy bridging the gap between hardware and software, whether that means writing C/C++ applications, 
-                        designing and creating mini projects with Arduino, or
-                        optimizing custom Klipper firmware for my 3D printer.</p>
-                </div>
-
-                <div class="about-card">
-                    <h3>Interests & Hobbies</h3>
-                    <p>Outside of my coursework and technical projects, I am typically prototyping 2D games in Godot, 
-                        designing parts in SOLIDWORKS, upgrading PC hardware, or playing competitive video games.</p>
-                </div>
-            </section>
+    <div class="page-hero">
+        <div class="container">
+            <span class="page-hero-label">About Me</span>
+            <h1 class="page-hero-title">Dylan Baker</h1>
+            <p class="page-hero-sub">Computer Engineering student at UVic, tinkerer, and small business owner based in Victoria, BC.</p>
         </div>
-    </main>
+    </div>
+
+    <div class="about-page-body">
+        <div class="container">
+            <div class="about-page-grid">
+
+                <!-- Main content -->
+                <div class="about-main">
+                    <p>I'm a first-year Computer Engineering student at the University of Victoria, having transferred from Camosun College where I completed an Engineering Transfer certificate. I'm drawn to the full stack of engineering, from writing embedded firmware in C to designing custom PCBs in KiCAD and building interactive software applications in Python and C++.</p>
+
+                    <p>My current focus is on ECE299 Engineering Design, where I'm building a full FM radio receiver from the ground up: schematic design, a custom PCB layout around the RDA5807M tuner IC, and embedded firmware for control and UI. It's the kind of project that ties together everything I've been studying so far.</p>
+
+                    <p>Outside of coursework, I run GameTime Painting, a residential and commercial painting business I've operated since 2022. Managing a crew, coordinating with clients, and handling scheduling and invoicing has given me practical project management experience that I bring to my engineering work too.</p>
+
+                    <p>In my spare time I'm typically prototyping games, upgrading hardware, 3D printing parts, or playing competitive games.</p>
+
+                    <p class="about-section-header">Work Experience</p>
+
+                    <div class="experience-list">
+
+                        <div class="experience-item">
+                            <p class="experience-role">Owner &amp; Operator</p>
+                            <p class="experience-org">GameTime Painting, Victoria, BC</p>
+                            <p class="experience-date">June 2022 – Present</p>
+                            <ul class="experience-bullets">
+                                <li>Managed a 3-person crew across 50+ residential and commercial painting contracts, handling all client estimates, scheduling, invoicing, and payroll.</li>
+                                <li>Built lasting relationships with contractors and suppliers; developed strong project management and client communication skills.</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <p class="experience-role">Lift Station Supervisor</p>
+                            <p class="experience-org">Mount Washington Ski Resort, Courtenay, BC</p>
+                            <p class="experience-date">Dec 2021 – Apr 2022</p>
+                            <ul class="experience-bullets">
+                                <li>Supervised crew rotations and break coverage across lift operations; completed daily inspection logs confirming compliance with resort safety protocols.</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <p class="experience-role">Sous-Chef</p>
+                            <p class="experience-org">Sooke Bistro, Sooke, BC</p>
+                            <p class="experience-date">Sept 2019 – Sept 2021</p>
+                            <ul class="experience-bullets">
+                                <li>Trained and supervised junior kitchen staff; managed inventory and supply ordering to minimize waste and control food costs.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="about-sidebar">
+
+                    <div class="sidebar-block">
+                        <p class="sidebar-block-label">Education</p>
+                        <p class="sidebar-block-title">University of Victoria</p>
+                        <p class="sidebar-block-sub">Computer Engineering, BEng</p>
+                        <p class="sidebar-block-date">Sept 2025 – Present</p>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <p class="sidebar-block-label">&nbsp;</p>
+                        <p class="sidebar-block-title">Camosun College</p>
+                        <p class="sidebar-block-sub">Engineering Transfer, Certificate</p>
+                        <p class="sidebar-block-date">Sept 2024 – June 2025</p>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <p class="sidebar-block-label">Awards &amp; Scholarships</p>
+                        <ul class="awards-list">
+                            <li>Ike Barber Transfer Scholarship (2025)</li>
+                            <li>Agnes Donachie Britton Math Award (2025)</li>
+                            <li>Rotary Club of Victoria – Harbourside Legacy Bursary (2025)</li>
+                            <li>Coast Capital Savings Credit Union Bursary (2024)</li>
+                            <li>Victoria Foundation – Olga Yakimovich Fund (2024)</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <p class="sidebar-block-label">Relevant Coursework</p>
+                        <ul class="awards-list">
+                            <li>Digital Design</li>
+                            <li>Linear Circuits</li>
+                            <li>Time Signals</li>
+                            <li>Electricity &amp; Magnetism</li>
+                            <li>Engineering Design</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-actions">
+                        <a href="/Dylan%20Baker%20-%20Resume%2020260620.pdf" class="btn-primary" target="_blank" rel="noreferrer">Download Resume</a>
+                        <a href="contact.html" class="btn-secondary">Get in Touch</a>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-copy">&copy; 2026 Dylan Baker</span>
+            <div class="footer-links">
+                <a href="mailto:dylanebaker@gmail.com">Email</a>
+                <a href="https://github.com/dylanebaker" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

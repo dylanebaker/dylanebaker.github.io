@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Radio Receiver, Dylan Baker</title>
+    <link rel="icon" type="image/png" href="/images/faviconTB.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Dylan Baker</a>
+        <div class="nav-links">
+            <a href="../portfolio.html">Projects</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="project-detail-body">
+        <div class="container">
+
+            <a href="../portfolio.html" class="back-link">← Back to Projects</a>
+
+            <div class="project-detail-hero">
+                <p class="project-detail-label">
+                    <span class="badge-dot active" style="display:inline-block; vertical-align:middle; margin-right:0.25rem;"></span>
+                    In Progress &middot; ECE299 Engineering Design Capstone
+                </p>
+                <h1 class="project-detail-title">FM Radio Receiver</h1>
+                <p class="project-detail-lead">Designing a complete FM radio receiver circuit from the ground up, with a custom schematic and PCB layout in KiCAD around the RDA5807M tuner IC, and embedded firmware for tuner control and a user interface.</p>
+                <div class="project-detail-tags">
+                    <span class="tag">KiCAD</span>
+                    <span class="tag">C</span>
+                    <span class="tag">Microcontroller</span>
+                    <span class="tag">PCB Design</span>
+                    <span class="tag">RDA5807M</span>
+                    <span class="tag">Embedded Firmware</span>
+                </div>
+            </div>
+
+            <div class="project-detail-grid">
+                <div class="detail-block">
+                    <p class="detail-block-title">Overview</p>
+                    <p>This is the ECE299 Engineering Design capstone project. The goal is to design a working FM radio receiver, from initial schematic all the way through to a functional, soldered PCB with embedded firmware.</p>
+                    <p>The core of the design is the RDA5807M, a single-chip FM tuner IC with I²C control. The microcontroller handles tuner configuration, frequency stepping, and a minimal user interface for station selection.</p>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Scope</p>
+                    <ul>
+                        <li>Full schematic design in KiCAD around the RDA5807M tuner IC.</li>
+                        <li>Custom PCB layout with appropriate RF considerations.</li>
+                        <li>Embedded firmware in C for I²C tuner control.</li>
+                        <li>User interface for frequency tuning and station selection.</li>
+                        <li>Audio output stage for speaker or headphone output.</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Tools &amp; Components</p>
+                    <ul>
+                        <li>KiCAD,schematic and PCB layout</li>
+                        <li>RDA5807M,FM tuner IC with I²C interface</li>
+                        <li>Microcontroller,tuner control and UI</li>
+                        <li>C,embedded firmware</li>
+                        <li>Oscilloscope and DMM,testing and debugging</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="status-block">
+                <div class="status-block-icon">⚙</div>
+                <div>
+                    <p class="status-block-title">Project in Progress</p>
+                    <p class="status-block-sub">This project is actively under development as part of the ECE299 Engineering Design course at the University of Victoria. No live demo is available yet,check back as the project progresses.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-copy">&copy; 2026 Dylan Baker</span>
+            <div class="footer-links">
+                <a href="mailto:dylanebaker@gmail.com">Email</a>
+                <a href="https://github.com/dylanebaker" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

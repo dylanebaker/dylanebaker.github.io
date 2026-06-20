@@ -3,75 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Baker - Memory Tester</title>
+    <title>Pattern Recognition Game, Dylan Baker</title>
+    <link rel="icon" type="image/png" href="/images/faviconTB.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="../index.html">HOME</a></li>
-            <li><a href="../portfolio.html">PORTFOLIO</a></li>
-            <li><a href="../about.html">ABOUT</a></li>
-            <li><a href="../contact.html">CONTACT</a></li>
-        </ul>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Dylan Baker</a>
+        <div class="nav-links">
+            <a href="../portfolio.html">Projects</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
     </nav>
 
-    <main class="page-wrapper project-page-wrapper">
-        <a href="../portfolio.html" class="breadcrumb-link">Back to portfolio</a>
+    <div class="project-detail-body">
+        <div class="container">
 
-        <section class="project-hero-card">
-            <p class="eyebrow">Game Development</p>
-            <h1>Memory Testing Game</h1>
-            <p class="project-lead">A Python game designed to play increasing sequences of color flashes which must be repeated back.</p>
+            <a href="../portfolio.html" class="back-link">← Back to Projects</a>
 
-            <div class="project-meta-row">
-                <span>Python 3.10</span>
-                <span>State Machine</span>
-                <span>UI Design</span>
+            <div class="project-detail-hero">
+                <p class="project-detail-label">Game Dev &middot; Hardware</p>
+                <h1 class="project-detail-title">Pattern Recognition Game</h1>
+                <p class="project-detail-lead">A sequence-based memory game built in two forms: a custom-etched and soldered PCB console with microcontroller, LEDs, and tactile buttons, and a browser-playable Python application.</p>
+                <div class="project-detail-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">PyGame</span>
+                    <span class="tag">Microcontroller</span>
+                    <span class="tag">PCB Etching</span>
+                    <span class="tag">Soldering</span>
+                    <span class="tag">State Machine</span>
+                </div>
             </div>
-        </section>
 
-        <section class="project-detail-grid">
-            <article class="detail-card">
-                <h2>Overview</h2>
-                <p>This project is a browser-playable memory challenge built in Python. The game presents a growing sequence of color flashes and asks the player to repeat the pattern correctly for as long as possible.</p>
-                <p>It focuses on clear visual feedback, escalating difficulty, and simple rules that make it easy to pick up while still becoming demanding over longer runs.</p>
-            </article>
-
-            <article class="detail-card">
-                <h2>Highlights</h2>
-                <ul class="detail-list">
-                    <li>Built in Python and exported for web play.</li>
-                    <li>Increasing sequence length raises difficulty over time.</li>
-                    <li>Fast visual feedback keeps each round readable.</li>
-                    <li>Playable directly inside the portfolio page.</li>
-                </ul>
-            </article>
-        </section>
-
-        <section class="detail-card media-card">
-            <div class="media-card-header">
-                <h2>Play The Game</h2>
+            <div class="project-detail-grid">
+                <div class="detail-block">
+                    <p class="detail-block-title">Overview</p>
+                    <p>The game presents a growing sequence of color flashes and asks the player to repeat the pattern correctly. Each successful round adds one more step to the sequence, making it progressively more demanding.</p>
+                    <p>The physical version uses a custom PCB with a microcontroller driving LEDs and reading tactile button inputs. The software version is a Python / PyGame app exported for the web.</p>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Highlights</p>
+                    <ul>
+                        <li>Dual implementation: physical PCB console and browser app.</li>
+                        <li>Custom-etched PCB with microcontroller, LEDs, and tactile buttons.</li>
+                        <li>Escalating difficulty via dynamic sequence generation.</li>
+                        <li>Strict input validation and fast visual feedback.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="demo-frame-shell" style="max-width: 600px; margin: 0 auto;">
-                <iframe
-                    src="/memory-game-javascript/"
-                    width="600"
-                    height="420"
-                    style="border: none; display: block;"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="project-action-row">
-                <a href="../memory-game-javascript/" class="primary-link" target="_blank" rel="noreferrer">Open standalone build</a>
-            </div>
-        </section>
 
-    </main>
+            <div class="demo-section">
+                <div class="demo-section-header">
+                    <span class="demo-section-title">Play the Game</span>
+                    <span class="demo-section-sub">Click Start to begin. Repeat the color sequence each round.</span>
+                </div>
+                <div class="demo-section-body" style="display:flex; justify-content:center; padding: 1.5rem 0;">
+                    <iframe
+                        src="/memory-game-javascript/"
+                        width="600"
+                        height="420"
+                        style="border:none; display:block; border-radius:8px;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="demo-section-footer">
+                    <a href="../memory-game-javascript/" class="inline-link" target="_blank" rel="noreferrer">Open fullscreen →</a>
+                </div>
+            </div>
 
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-copy">&copy; 2026 Dylan Baker</span>
+            <div class="footer-links">
+                <a href="mailto:dylanebaker@gmail.com">Email</a>
+                <a href="https://github.com/dylanebaker" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

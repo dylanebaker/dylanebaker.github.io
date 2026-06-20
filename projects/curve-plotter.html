@@ -3,117 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Baker - Curve Plotter</title>
+    <title>Curve Plotter, Dylan Baker</title>
+    <link rel="icon" type="image/png" href="/images/faviconTB.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="../index.html">HOME</a></li>
-            <li><a href="../portfolio.html">PORTFOLIO</a></li>
-            <li><a href="../about.html">ABOUT</a></li>
-            <li><a href="../contact.html">CONTACT</a></li>
-        </ul>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Dylan Baker</a>
+        <div class="nav-links">
+            <a href="../portfolio.html">Projects</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
     </nav>
 
-    <main class="page-wrapper project-page-wrapper">
-        <a href="../portfolio.html" class="breadcrumb-link">Back to portfolio</a>
+    <div class="project-detail-body">
+        <div class="container">
 
-        <section class="project-hero-card">
-            <p class="eyebrow">Software Project</p>
-            <h1>Curve Plotter</h1>
-            <p class="project-lead">A C++ application built with SDL3 that plots curves, tracks the nearest point to the cursor, and renders the tangent line in real time.</p>
+            <a href="../portfolio.html" class="back-link">← Back to Projects</a>
 
-            <div class="project-meta-row">
-                <span>C++</span>
-                <span>SDL3</span>
-                <span>Interactive Math Visualization</span>
+            <div class="project-detail-hero">
+                <p class="project-detail-label">Software Project</p>
+                <h1 class="project-detail-title">Curve Plotter</h1>
+                <p class="project-detail-lead">A C++ application built with SDL3 that plots curves, tracks the nearest point to the cursor in real time, and renders the corresponding tangent line, compiled to WebAssembly and embedded below.</p>
+                <div class="project-detail-tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">SDL3</span>
+                    <span class="tag">WebAssembly</span>
+                    <span class="tag">Emscripten</span>
+                    <span class="tag">Interactive Math</span>
+                </div>
             </div>
-        </section>
 
-        <section class="project-detail-grid">
-            <article class="detail-card">
-                <h2>Overview</h2>
-                <p>This project focuses on interactive visualization. Given a function of x and y, the application plots the resulting curve and continuously calculates the tangent line nearest the cursor position.</p>
-                <p>The result is a tool that combines graphics programming, math-heavy logic, and responsive input handling in a compact desktop-style application.</p>
-            </article>
-
-            <article class="detail-card">
-                <h2>Highlights</h2>
-                <ul class="detail-list">
-                    <li>Plots a curve from user-defined function input.</li>
-                    <li>Finds the point nearest the cursor in real time.</li>
-                    <li>Draws the tangent line corresponding to the selected point.</li>
-                    <li>Runs directly inside the portfolio page as an embedded interactive demo.</li>
-                </ul>
-            </article>
-        </section>
-
-        <section class="detail-card media-card">
-            <div class="media-card-header">
-                <h2>Project Visual</h2>
-                <p>Interactive preview embedded from the live build.</p>
+            <div class="project-detail-grid">
+                <div class="detail-block">
+                    <p class="detail-block-title">Overview</p>
+                    <p>Given a function of x and y, the application plots the resulting curve and continuously calculates the nearest point to the cursor position, then draws the tangent line at that point.</p>
+                    <p>The result is a compact tool that combines graphics programming, numerical methods, and responsive input handling, all running natively in the browser via WebAssembly.</p>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Highlights</p>
+                    <ul>
+                        <li>Plots a curve from a user-defined function of x and y.</li>
+                        <li>Finds the point on the curve nearest the cursor in real time.</li>
+                        <li>Draws the tangent line at the selected point.</li>
+                        <li>Compiled with Emscripten to run in the browser with no install.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="demo-frame-shell">
-                <iframe src="../CurvePlotter/embed.html" title="Curve Plotter demo" class="demo-frame" id="curve-plotter-frame" scrolling="no"></iframe>
+
+            <div class="demo-section">
+                <div class="demo-section-header">
+                    <span class="demo-section-title">Live Demo</span>
+                    <span class="demo-section-sub">Move your cursor over the canvas to explore the curve.</span>
+                </div>
+                <div class="demo-section-body">
+                    <iframe src="../CurvePlotter/embed.html" title="Curve Plotter demo" id="curve-plotter-frame" scrolling="no" style="width:100%; border:none; display:block;"></iframe>
+                </div>
             </div>
-        </section>
-    </main>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-copy">&copy; 2026 Dylan Baker</span>
+            <div class="footer-links">
+                <a href="mailto:dylanebaker@gmail.com">Email</a>
+                <a href="https://github.com/dylanebaker" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dylan-e-baker/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        const curvePlotterFrame = document.getElementById('curve-plotter-frame');
+        const frame = document.getElementById('curve-plotter-frame');
 
-        function syncCurvePlotterFrameHeight() {
-            if (!curvePlotterFrame || !curvePlotterFrame.contentWindow) {
-                return;
-            }
-
-            const embeddedDocument = curvePlotterFrame.contentWindow.document;
-
-            if (!embeddedDocument || !embeddedDocument.documentElement || !embeddedDocument.body) {
-                return;
-            }
-
-            const embeddedRoot = embeddedDocument.documentElement;
-            const embeddedBody = embeddedDocument.body;
-
-            embeddedRoot.style.overflow = 'hidden';
-            embeddedBody.style.overflow = 'hidden';
-            embeddedBody.style.margin = '0';
-
-            curvePlotterFrame.style.height = Math.ceil(Math.max(
-                embeddedBody.scrollHeight,
-                embeddedRoot.scrollHeight,
-                embeddedBody.offsetHeight,
-                embeddedRoot.offsetHeight,
-                embeddedBody.clientHeight,
-                embeddedRoot.clientHeight
+        function syncHeight() {
+            if (!frame || !frame.contentWindow) return;
+            const doc = frame.contentWindow.document;
+            if (!doc || !doc.documentElement || !doc.body) return;
+            const root = doc.documentElement;
+            const body = doc.body;
+            root.style.overflow = 'hidden';
+            body.style.overflow = 'hidden';
+            body.style.margin = '0';
+            frame.style.height = Math.ceil(Math.max(
+                body.scrollHeight, root.scrollHeight,
+                body.offsetHeight, root.offsetHeight,
+                body.clientHeight, root.clientHeight
             )) + 'px';
         }
 
-        curvePlotterFrame.addEventListener('load', function () {
-            syncCurvePlotterFrameHeight();
-
-            const embeddedWindow = curvePlotterFrame.contentWindow;
-            const embeddedDocument = embeddedWindow ? embeddedWindow.document : null;
-
-            if (embeddedDocument && embeddedDocument.documentElement) {
-                const resizeObserver = new ResizeObserver(syncCurvePlotterFrameHeight);
-                resizeObserver.observe(embeddedDocument.documentElement);
-
-                if (embeddedDocument.body) {
-                    resizeObserver.observe(embeddedDocument.body);
-                }
+        frame.addEventListener('load', function () {
+            syncHeight();
+            const embeddedDoc = frame.contentWindow ? frame.contentWindow.document : null;
+            if (embeddedDoc && embeddedDoc.documentElement) {
+                const ro = new ResizeObserver(syncHeight);
+                ro.observe(embeddedDoc.documentElement);
+                if (embeddedDoc.body) ro.observe(embeddedDoc.body);
             }
-
-            window.setTimeout(syncCurvePlotterFrameHeight, 300);
-            window.setTimeout(syncCurvePlotterFrameHeight, 1000);
+            setTimeout(syncHeight, 300);
+            setTimeout(syncHeight, 1000);
         });
 
-        window.addEventListener('resize', syncCurvePlotterFrameHeight);
+        window.addEventListener('resize', syncHeight);
     </script>
+
 </body>
 </html>
