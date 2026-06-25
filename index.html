@@ -6,20 +6,22 @@
     <title>Dylan Baker, Computer Engineering Student</title>
     <meta name="description" content="Dylan Baker, Computer Engineering student at the University of Victoria. Building at the intersection of software and hardware.">
     <link rel="icon" type="image/png" href="/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <style>
         /* Dark hero (index only) */
-        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 60%); }
-        .hero .hero-eyebrow { color: #60a5fa; }
+        .hero { background: linear-gradient(135deg, #6b1a18 0%, #2e0908 65%); }
+        .hero .hero-eyebrow { color: #ff7500; }
         .hero .hero-name { color: #f1f5f9; }
         .hero .hero-role { color: #94a3b8; }
-        .hero .hero-tagline { color: #64748b; }
+        .hero .hero-tagline {
+            color: #64748b;
+            font-size: clamp(1.0625rem, 1.75vw, 1.1875rem);
+        }
         .hero .hero-photo {
             border-color: rgba(255,255,255,0.1);
             box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+            width: clamp(200px, 24vw, 320px);
+            height: clamp(200px, 24vw, 320px);
         }
         .hero .btn-secondary {
             color: #94a3b8;
@@ -64,12 +66,12 @@
 
         /* Dark contact CTA (index only) */
         .contact-cta {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 60%);
+            background: linear-gradient(135deg, #2e0908 0%, #0f0100 65%);
             border-color: rgba(255,255,255,0.07);
         }
-        .contact-cta .section-label { color: #60a5fa; }
+        .contact-cta .section-label { color: #ff7500; }
         .contact-cta .section-title { color: #f1f5f9; }
-        .contact-cta-sub { color: #64748b; }
+        .contact-cta-sub { color: #94a3b8; }
         .contact-cta .btn-secondary {
             color: #94a3b8;
             border-color: rgba(255,255,255,0.15);
@@ -97,7 +99,7 @@
 
     <!-- Hero -->
     <section class="hero">
-        <img src="/images/mobius_strip_nobg.png" alt="" class="hero-watermark" aria-hidden="true">
+        <img src="/images/new_mobius_strip.png" alt="" class="hero-watermark" aria-hidden="true">
         <div class="container">
             <div class="hero-inner">
                 <div class="hero-text">
