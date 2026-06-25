@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FM Radio Receiver, Dylan Baker</title>
+    <title>FM Radio Receiver</title>
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -63,12 +63,30 @@
                 <div class="detail-block">
                     <p class="detail-block-title">Tools &amp; Components</p>
                     <ul>
-                        <li>KiCAD,schematic and PCB layout</li>
-                        <li>RDA5807M,FM tuner IC with I²C interface</li>
-                        <li>Microcontroller,tuner control and UI</li>
-                        <li>C,embedded firmware</li>
-                        <li>Oscilloscope and DMM,testing and debugging</li>
+                        <li>KiCAD, schematic and PCB layout</li>
+                        <li>RDA5807M, FM tuner IC with I²C interface</li>
+                        <li>Microcontroller, tuner control and UI</li>
+                        <li>C, embedded firmware</li>
+                        <li>Oscilloscope and DMM, testing and debugging</li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="project-detail-gallery">
+                <p class="detail-block-title" style="margin-bottom: 1rem;">Gallery</p>
+                <div class="media-grid">
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/RadioClock Circuit Schematic.png" alt="Circuit Schematic" style="object-fit: contain; background: var(--bg-subtle);">
+                        <p class="media-item-caption">Circuit Schematic</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/RadioClock PCB Schematic.png" alt="PCB Layout" style="object-fit: contain; background: var(--bg-subtle);">
+                        <p class="media-item-caption">PCB Layout</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/RadioClock PCB 3D Model Render.png" alt="PCB 3D Model Render" style="object-fit: contain; background: var(--bg-subtle);">
+                        <p class="media-item-caption">PCB 3D Model Render</p>
+                    </div>
                 </div>
             </div>
 
@@ -76,7 +94,7 @@
                 <div class="status-block-icon">⚙</div>
                 <div>
                     <p class="status-block-title">Project in Progress</p>
-                    <p class="status-block-sub">This project is actively under development as part of the ECE299 Engineering Design course at the University of Victoria. No live demo is available yet,check back as the project progresses.</p>
+                    <p class="status-block-sub">This project is actively under development as part of the ECE299 Engineering Design course at the University of Victoria. No live demo is available yet, check back as the project progresses.</p>
                 </div>
             </div>
 
@@ -93,6 +111,31 @@
             </div>
         </div>
     </footer>
+
+
+    <div id="lightbox" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; cursor:zoom-out; display:none; align-items:center; justify-content:center;" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="" style="max-width:90vw; max-height:90vh; object-fit:contain; border-radius:var(--radius); box-shadow:0 8px 40px rgba(0,0,0,0.6);">
+    </div>
+
+    <style>
+        .media-item--expand { cursor: zoom-in; }
+    </style>
+
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-img').alt = img.alt;
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 
 </body>
 </html>
