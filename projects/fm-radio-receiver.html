@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FM Radio Receiver</title>
+    <meta name="description" content="The Radio Rhino: an FM radio alarm clock built on a custom two-layer KiCad PCB, a Raspberry Pi Pico W running MicroPython, and a 3D-printed enclosure. ECE299 design capstone.">
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -29,45 +30,94 @@
 
             <div class="project-detail-hero">
                 <p class="project-detail-label">
-                    <span class="badge-dot active" style="display:inline-block; vertical-align:middle; margin-right:0.25rem;"></span>
-                    In Progress &middot; ECE299 Engineering Design Capstone
+                    <span class="badge-dot" style="display:inline-block; vertical-align:middle; margin-right:0.25rem;"></span>
+                    Hardware &middot; Embedded Systems &middot; ECE299 Design Capstone
                 </p>
                 <h1 class="project-detail-title">FM Radio Receiver</h1>
-                <p class="project-detail-lead">Designing a complete FM radio receiver circuit from the ground up, with a custom schematic and PCB layout in KiCAD around the RDA5807M tuner IC, and embedded firmware for tuner control and a user interface.</p>
+                <p class="project-detail-lead">The Radio Rhino: a complete FM radio alarm clock, taken from requirements to a working prototype over one term. A custom two-layer PCB designed in KiCad, a Raspberry Pi Pico W running MicroPython, an RDA5807M tuner driving an LM386 amplifier, and a 3D-printed rhinoceros enclosure. The final firmware also hosts its own WiFi access point and serves a phone-friendly web control panel.</p>
                 <div class="project-detail-tags">
-                    <span class="tag">KiCAD</span>
-                    <span class="tag">C</span>
-                    <span class="tag">Microcontroller</span>
+                    <span class="tag">KiCad</span>
                     <span class="tag">PCB Design</span>
+                    <span class="tag">MicroPython</span>
+                    <span class="tag">Raspberry Pi Pico W</span>
                     <span class="tag">RDA5807M</span>
-                    <span class="tag">Embedded Firmware</span>
+                    <span class="tag">I²C</span>
+                    <span class="tag">SPI</span>
+                    <span class="tag">SolidWorks</span>
+                    <span class="tag">3D Printing</span>
+                    <span class="tag">Hand Soldering</span>
                 </div>
             </div>
 
             <div class="project-detail-grid">
                 <div class="detail-block">
                     <p class="detail-block-title">Overview</p>
-                    <p>This is the ECE299 Engineering Design capstone project. The goal is to design a working FM radio receiver, from initial schematic all the way through to a functional, soldered PCB with embedded firmware.</p>
-                    <p>The core of the design is the RDA5807M, a single-chip FM tuner IC with I²C control. The microcontroller handles tuner configuration, frequency stepping, and a minimal user interface for station selection.</p>
+                    <p>The Radio Rhino combines a digital clock, a settable alarm, and an FM broadcast receiver in a single 3D-printed enclosure. It was designed and built as the ECE299 Engineering Design capstone at the University of Victoria, with a partner, under the course constraint that a single Raspberry Pi Pico W programmed in MicroPython handle all information processing.</p>
+                    <p>The circuit was validated on a breadboard, transferred to a custom two-layer PCB designed in KiCad, fabricated commercially, and assembled by hand. I owned the schematic capture, PCB layout, and embedded firmware.</p>
                 </div>
                 <div class="detail-block">
-                    <p class="detail-block-title">Scope</p>
+                    <p class="detail-block-title">At a Glance</p>
                     <ul>
-                        <li>Full schematic design in KiCAD around the RDA5807M tuner IC.</li>
-                        <li>Custom PCB layout with appropriate RF considerations.</li>
-                        <li>Embedded firmware in C for I²C tuner control.</li>
-                        <li>User interface for frequency tuning and station selection.</li>
-                        <li>Audio output stage for speaker or headphone output.</li>
+                        <li><strong>MCU:</strong> Raspberry Pi Pico W, RP2040 dual Cortex-M0+ at 133 MHz, MicroPython.</li>
+                        <li><strong>Tuner:</strong> RDA5807M single-chip FM receiver over I²C.</li>
+                        <li><strong>Audio:</strong> LM386N-4 amplifier into a 3 W, 8 Ω speaker.</li>
+                        <li><strong>Display:</strong> 1.3" SH1106 OLED, 128×64, over SPI.</li>
+                        <li><strong>Input:</strong> rotary encoder with switch, plus four pushbuttons.</li>
+                        <li><strong>Board:</strong> two-layer PCB, DRC clean, RF keep-outs for the 2.4 GHz antenna.</li>
+                        <li><strong>Cost:</strong> roughly $35 in components, $21.73 for fabrication.</li>
                     </ul>
                 </div>
                 <div class="detail-block">
-                    <p class="detail-block-title">Tools &amp; Components</p>
+                    <p class="detail-block-title">Circuit &amp; PCB Design</p>
                     <ul>
-                        <li>KiCAD, schematic and PCB layout</li>
-                        <li>RDA5807M, FM tuner IC with I²C interface</li>
-                        <li>Microcontroller, tuner control and UI</li>
-                        <li>C, embedded firmware</li>
-                        <li>Oscilloscope and DMM, testing and debugging</li>
+                        <li>Full schematic capture in KiCad, including the I²C pull-up network, the LM386 gain and output-filter chain, and header breakouts for every off-board control.</li>
+                        <li>Two-layer layout passing DRC before fabrication, with copper keep-out regions around the Pico W's on-module 2.4 GHz antenna and the USB connector.</li>
+                        <li>All user-interface hardware leaves the board through headers so the display, encoder, and buttons can mount to the enclosure shell.</li>
+                        <li>Gerbers and drill files exported and sent to a commercial fabricator.</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Firmware</p>
+                    <ul>
+                        <li>Staged clock editing driven by the encoder: view, hours, minutes, seconds, alarm hours, alarm minutes, with the active field bracketed on screen.</li>
+                        <li>Software debouncing throughout: a 200 ms per-button guard, polled quadrature decoding with a 10 ms step filter, and a 500 ms lockout after each encoder click.</li>
+                        <li>Alarm on a PWM-driven piezo buzzer with three selectable tone presets and a two-second preview; the radio auto-mutes on trigger and its prior state is restored on dismiss or snooze.</li>
+                        <li>Selectable 12-hour and 24-hour display, converted at presentation time so the stored time and the display can never disagree.</li>
+                        <li>Firmware-side noise reduction: forced mono, soft mute, 75 µs de-emphasis, and the SMPS held in PWM mode to kill rail whine.</li>
+                        <li>Interrupt handlers only ever set flags. Every I²C transaction happens in the main loop, which eliminated a whole class of intermittent bugs.</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">WiFi Control Panel</p>
+                    <p>The Pico W's CYW43439 radio hosts its own access point, and the device serves a phone-friendly web panel at <strong>radiorhino.clock</strong> through a catch-all DNS responder. Frequency, volume, mute, alarm time, and display format are all settable from a phone, and a one-tap control syncs the device clock from the phone's own time.</p>
+                    <p>The original design joined an existing network instead. That approach was abandoned after the failure was traced to WPA3-transition security on phone hotspots, which the CYW43 driver can see in a scan but cannot join. Access-point mode removed the dependency entirely.</p>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Enclosure</p>
+                    <ul>
+                        <li>Rhinoceros-themed shell modelled in SolidWorks, with a dimensioned multi-view drawing produced for fabrication.</li>
+                        <li>Cutouts sized for the OLED window, encoder shaft, speaker grille, four buttons, and the telescoping antenna.</li>
+                        <li>Printed in multiple parts and assembled around the populated board.</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Debugging Highlights</p>
+                    <ul>
+                        <li><strong>Amplifier saturation.</strong> First bring-up produced distorted audio. Tracing the audio path against the schematic with a scope isolated a DC bias at the amplifier input created by R4; omitting it restored clean reproduction.</li>
+                        <li><strong>Failing microcontroller.</strong> The Pico W started booting intermittently. Rails measured healthy in the failed state and the module always enumerated when BOOTSEL was held, which proved the core, crystal, and USB path were fine and condemned the QSPI flash. The module was floated off with low-temperature alloy and replaced.</li>
+                        <li><strong>Display shutting off on redraw.</strong> Traced to a broken reset-line wire; the SH1106 wakes from hardware reset with the display off, so every redraw exposed it.</li>
+                        <li><strong>Dead buttons.</strong> Two off-board buttons never registered. The fault was in hand-soldered flying leads, re-made with pre-tinned, fluxed joints and strain relief.</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <p class="detail-block-title">Testing &amp; Results</p>
+                    <ul>
+                        <li>Net-by-net continuity and rail short checks before every power-up.</li>
+                        <li>Ten presses per button and ten detents per direction, verifying exactly one registered event each.</li>
+                        <li>Volume sweep across every step, band-edge wrap-around, and mute verification on live stations.</li>
+                        <li>A 20-cycle power-replug stress test on the replacement module, booting normally every cycle.</li>
+                        <li>End-to-end alarm flow run against all three tone presets, from both the encoder and the web panel, in both display formats.</li>
+                        <li>All ten test rows in the final report pass, and the prototype meets every mandatory project requirement.</li>
                     </ul>
                 </div>
             </div>
@@ -76,25 +126,41 @@
                 <p class="detail-block-title" style="margin-bottom: 1rem;">Gallery</p>
                 <div class="media-grid">
                     <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
-                        <img src="/images/RadioClock Circuit Schematic.png" alt="Circuit Schematic" style="object-fit: contain; background: var(--bg-subtle);">
-                        <p class="media-item-caption">Circuit Schematic</p>
+                        <img src="/images/projects/radio_rhino_finished.jpg" alt="The finished Radio Rhino clock-radio, a 3D-printed rhinoceros with an OLED display, tuning knob, speaker, and telescoping antenna" style="object-fit: contain; background: #ffffff;">
+                        <p class="media-item-caption">Finished build</p>
                     </div>
                     <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
-                        <img src="/images/RadioClock PCB Schematic.png" alt="PCB Layout" style="object-fit: contain; background: var(--bg-subtle);">
-                        <p class="media-item-caption">PCB Layout</p>
+                        <img src="/images/projects/radio_rhino_pcb_assembled.jpg" alt="The assembled two-layer PCB with the Pico W, RDA5807M tuner, and LM386 amplifier populated, wired to the OLED module">
+                        <p class="media-item-caption">Assembled PCB</p>
                     </div>
                     <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
-                        <img src="/images/RadioClock PCB 3D Model Render.png" alt="PCB 3D Model Render" style="object-fit: contain; background: var(--bg-subtle);">
-                        <p class="media-item-caption">PCB 3D Model Render</p>
+                        <img src="/images/projects/radio_rhino_schematic.png" alt="Complete KiCad circuit schematic of the Radio Rhino clock-radio" style="object-fit: contain; background: var(--bg-subtle);">
+                        <p class="media-item-caption">KiCad schematic</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/projects/radio_rhino_pcb_layout.png" alt="Final two-layer PCB layout as fabricated, showing the RF keep-out regions" style="object-fit: contain; background: #0f172a;">
+                        <p class="media-item-caption">PCB layout as fabricated</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/projects/radio_rhino_render.png" alt="SolidWorks render of the rhinoceros enclosure" style="object-fit: contain; background: var(--bg-subtle);">
+                        <p class="media-item-caption">Enclosure render</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/projects/radio_rhino_drawing.png" alt="Multi-view dimensioned engineering drawing of the rhinoceros enclosure" style="object-fit: contain; background: #ffffff;">
+                        <p class="media-item-caption">Enclosure engineering drawing</p>
+                    </div>
+                    <div class="media-item media-item--expand" onclick="openLightbox(this.querySelector('img'))">
+                        <img src="/images/projects/radio_rhino_gantt.png" alt="Gantt chart of the project schedule from June to August 2026" style="object-fit: contain; background: #ffffff;">
+                        <p class="media-item-caption">Project schedule</p>
                     </div>
                 </div>
             </div>
 
             <div class="status-block">
-                <div class="status-block-icon">⚙</div>
+                <div class="status-block-icon">✓</div>
                 <div>
-                    <p class="status-block-title">Project in Progress</p>
-                    <p class="status-block-sub">This project is actively under development as part of the ECE299 Engineering Design course at the University of Victoria. No live demo is available yet, check back as the project progresses.</p>
+                    <p class="status-block-title">Project Complete</p>
+                    <p class="status-block-sub">Built, demonstrated, and documented for ECE299 Engineering Design at the University of Victoria. The prototype meets every mandatory requirement and adds a WiFi web control panel, selectable alarm tones, adjustable display brightness, and an idle screensaver with playable mini-games on top of the required scope.</p>
                 </div>
             </div>
 
